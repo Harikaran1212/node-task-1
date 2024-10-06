@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -6,9 +7,11 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = 3000;
 
+
 // Use body-parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 // MongoDB connection
 const uri = 'mongodb+srv://kavitharaghu2003:9jsuE5sE3eX4p2Mz@mine.fjzpv.mongodb.net/?retryWrites=true&w=majority&appName=mine';
