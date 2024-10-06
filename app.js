@@ -11,7 +11,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/mydb', { useNewUrlParser: true, useUnifiedTopology: true });
+const uri = 'mongodb+srv://kavitharaghu2003:9jsuE5sE3eX4p2Mz@mine.fjzpv.mongodb.net/?retryWrites=true&w=majority&appName=mine';
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to MongoDB Atlas'))
+    .catch(err => console.error('Error connecting to MongoDB Atlas', err));
 
 // Define a MongoDB schema
 const userSchema = new mongoose.Schema({
