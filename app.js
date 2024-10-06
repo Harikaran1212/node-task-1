@@ -11,7 +11,15 @@ const PORT = 3000;
 // Use body-parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors(
+    {
+        origin:["https://node-task-1-zeta.vercel.app"],
+        methods:["POST","GET"],
+        Credential: true
+    }
+));
+
+app.use(express.json());
 
 // MongoDB connection
 const uri = 'mongodb+srv://kavitharaghu2003:9jsuE5sE3eX4p2Mz@mine.fjzpv.mongodb.net/?retryWrites=true&w=majority&appName=mine';
