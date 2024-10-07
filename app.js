@@ -19,10 +19,11 @@ app.use(cors(
     }
 ));
 
+
 app.use(express.json());
 
 // MongoDB connection
-const uri = 'mongodb+srv://kavitharaghu2003:9jsuE5sE3eX4p2Mz@mine.fjzpv.mongodb.net/?retryWrites=true&w=majority&appName=mine';
+const uri = 'mongodb+srv://kavitharaghu2003:9jsuE5sE3eX4p2Mz@mine.fjzpv.mongodb.net/myDatabase?retryWrites=true&w=majority';
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB Atlas'))
@@ -99,4 +100,3 @@ app.get('/getData', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 }); 
-
