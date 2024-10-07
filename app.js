@@ -5,20 +5,18 @@ const mongoose = require('mongoose');
 
 // Initialize Express app
 const app = express();
-const PORT = 3000;
-
+const PORT = process.env.PORT || 3000;  // Use process.env.PORT for production
 
 // Use body-parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors(
-    {
-        origin:["https://node-task-1-zeta.vercel.app"],
-        methods:["POST","GET"],
-        Credential: true
-    }
-));
 
+// CORS configuration
+app.use(cors({
+    origin: "https://node-task-1-zeta.vercel.app", // Allow specific origin
+    methods: ["POST", "GET", "OPTIONS"], // Include OPTIONS method for preflight
+    credentials: true // Fix typo and enable credentials if needed
+}));
 
 app.use(express.json());
 
@@ -67,7 +65,6 @@ app.use(express.static('public'));
 // API to save data into MongoDB
 app.post('/saveData', async (req, res) => {
     try {
-        // Set creation and update times
         const creationTime = new Date();
         const lastUpdatedTime = creationTime;
 
@@ -99,4 +96,4 @@ app.get('/getData', async (req, res) => {
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
-}); 
+});
