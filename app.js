@@ -13,10 +13,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // CORS configuration
 app.use(cors({
-    origin: "https://node-task-1-zeta.vercel.app", // Allow specific origin
-    methods: ["POST", "GET", "OPTIONS"], // Include OPTIONS method for preflight
-    credentials: true // Fix typo and enable credentials if needed
+    origin: ["https://node-task-1-zeta.vercel.app"], // Change this to the correct front-end URL
+    methods: ["POST", "GET"],
+    credentials: true // Correct the spelling here (was 'Credential')
 }));
+app.options('*', cors()); // Allow preflight requests for all routes
 
 app.use(express.json());
 
