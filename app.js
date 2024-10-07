@@ -3,32 +3,20 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-// Initialize Express app
 const app = express();
-const PORT = process.env.PORT || 3000;  // Use process.env.PORT for production
+const PORT = process.env.PORT || 3000; 
 
-// Use body-parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// CORS configuration
-app.use(cors({
-    origin: ["https://node-task-1-zeta.vercel.app"], // Change this to the correct front-end URL
-    methods: ["POST", "GET"],
-    credentials: true // Correct the spelling here (was 'Credential')
-}));
-app.options('*', cors()); // Allow preflight requests for all routes
-
+app.use(cors());
 app.use(express.json());
 
-// MongoDB connection
 const uri = 'mongodb+srv://kavitharaghu2003:9jsuE5sE3eX4p2Mz@mine.fjzpv.mongodb.net/?retryWrites=true&w=majority&appName=mine';
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB Atlas'))
     .catch(err => console.error('Error connecting to MongoDB Atlas', err));
 
-// Define a MongoDB schema
 const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
@@ -57,13 +45,12 @@ const userSchema = new mongoose.Schema({
     lastUpdatedTime: Date
 });
 
-// Create a model based on the schema
+
 const User = mongoose.model('User', userSchema);
 
-// Serve the static HTML form
+
 app.use(express.static('public'));
 
-// API to save data into MongoDB
 app.post('/saveData', async (req, res) => {
     try {
         const creationTime = new Date();
@@ -83,7 +70,6 @@ app.post('/saveData', async (req, res) => {
     }
 });
 
-// API to retrieve data from MongoDB
 app.get('/getData', async (req, res) => {
     try {
         const users = await User.find({});
@@ -94,7 +80,7 @@ app.get('/getData', async (req, res) => {
     }
 });
 
-// Start the server
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

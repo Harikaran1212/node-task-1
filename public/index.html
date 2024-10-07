@@ -92,7 +92,7 @@
                 };
                 
                 $.ajax({
-                    url: 'https://node-task-1-13.onrender.com',  // Adjust this URL based on your server
+                    url: 'https://node-task-1-13.onrender.com/saveData', 
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify(formData),
@@ -105,10 +105,9 @@
                 });
             });
 
-            // Fetch data from MongoDB
             $('#fetchButton').on('click', function() {
                 $.ajax({
-                    url: 'https://node-task-1-13.onrender.com/api/read',  // Adjust this URL based on your server
+                    url: 'https://node-task-1-13.onrender.com/getData',  
                     type: 'GET',
                     success: function(data) {
                         $('#dataList').empty();
