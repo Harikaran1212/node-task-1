@@ -67,13 +67,134 @@
                 const now = new Date();
                 return now.toISOString();
             }
-
+    
+            // Function to display error messages
+            function showError(fieldId, message) {
+                const errorElement = $('#' + fieldId + 'Error');
+                if (!errorElement.length) {
+                    $('#' + fieldId).after('<div id="' + fieldId + 'Error" class="error-message" style="color: red; font-size: 12px;">' + message + '</div>');
+                }
+            }
+    
+            // Function to remove error messages
+            function removeError(fieldId) {
+                $('#' + fieldId + 'Error').remove();
+            }
+    
+            // Validate form fields
+            function validateForm() {
+                let isValid = true;
+    
+                // First Name validation
+                if ($('#firstName').val().trim() === "") {
+                    showError('firstName', 'First Name is required');
+                    isValid = false;
+                } else {
+                    removeError('firstName');
+                }
+    
+                // Last Name validation
+                if ($('#lastName').val().trim() === "") {
+                    showError('lastName', 'Last Name is required');
+                    isValid = false;
+                } else {
+                    removeError('lastName');
+                }
+    
+                // Mobile validation
+                const mobile = $('#mobile').val();
+                const mobilePattern = /^\d{10}$/;
+                if (!mobilePattern.test(mobile)) {
+                    showError('mobile', 'Mobile number must be 10 digits');
+                    isValid = false;
+                } else {
+                    removeError('mobile');
+                }
+    
+                // Email validation
+                const email = $('#email').val();
+                const emailPattern = /^\S+@\S+\.\S+$/;
+                if (!emailPattern.test(email)) {
+                    showError('email', 'Please enter a valid email');
+                    isValid = false;
+                } else {
+                    removeError('email');
+                }
+    
+                // Address validation
+                if ($('#address').val().trim() === "") {
+                    showError('address', 'Address is required');
+                    isValid = false;
+                } else {
+                    removeError('address');
+                }
+    
+                // Street validation
+                if ($('#street').val().trim() === "") {
+                    showError('street', 'Street is required');
+                    isValid = false;
+                } else {
+                    removeError('street');
+                }
+    
+                // City validation
+                if ($('#city').val().trim() === "") {
+                    showError('city', 'City is required');
+                    isValid = false;
+                } else {
+                    removeError('city');
+                }
+    
+                // State validation
+                if ($('#state').val().trim() === "") {
+                    showError('state', 'State is required');
+                    isValid = false;
+                } else {
+                    removeError('state');
+                }
+    
+                // Country validation
+                if ($('#country').val().trim() === "") {
+                    showError('country', 'Country is required');
+                    isValid = false;
+                } else {
+                    removeError('country');
+                }
+    
+                // Login ID validation
+                const loginId = $('#loginId').val();
+                const loginIdPattern = /^[a-zA-Z0-9]{8,}$/;
+                if (!loginIdPattern.test(loginId)) {
+                    showError('loginId', 'Login ID must be at least 8 characters, alphanumeric');
+                    isValid = false;
+                } else {
+                    removeError('loginId');
+                }
+    
+                // Password validation
+                const password = $('#password').val();
+                const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
+                if (!passwordPattern.test(password)) {
+                    showError('password', 'Password must be at least 6 characters, contain 1 uppercase, 1 lowercase, 1 number, 1 special character');
+                    isValid = false;
+                } else {
+                    removeError('password');
+                }
+    
+                return isValid;
+            }
+    
             // Save data to MongoDB
             $('#saveButton').on('click', function() {
+                // Validate form before submitting
+                if (!validateForm()) {
+                    return;
+                }
+    
                 // Set creation and update times
                 const creationTime = getCurrentTime();
                 const lastUpdatedTime = creationTime;
-
+    
                 // Form data
                 const formData = {
                     firstName: $('#firstName').val(),
@@ -92,7 +213,7 @@
                 };
                 
                 $.ajax({
-                    url: 'https://node-9ogz.onrender.com/saveData', 
+                    url: 'https://node-9ogz.onrender.com/saveData',  // Adjust this URL based on your server
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify(formData),
@@ -104,10 +225,11 @@
                     }
                 });
             });
-
+    
+            // Fetch data from MongoDB
             $('#fetchButton').on('click', function() {
                 $.ajax({
-                    url: 'https://node-9ogz.onrender.com/getData',  
+                    url: 'https://node-9ogz.onrender.com/saveData',  // Adjust this URL based on your server
                     type: 'GET',
                     success: function(data) {
                         $('#dataList').empty();
@@ -128,8 +250,8 @@
                     }
                 });
             });
-            
         });
     </script>
+    
 </body>
 </html>
