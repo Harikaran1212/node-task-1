@@ -84,19 +84,20 @@
             // Validate form fields
             function validateForm() {
                 let isValid = true;
+                const namePattern = /^[a-zA-Z]+$/;
     
                 // First Name validation
-                if ($('#firstName').val().trim() === "") {
-                    showError('firstName', 'First Name is required');
+               if (!namePattern.test($('#firstName').val().trim())) {
+                    showError('firstName', 'First Name must contain only alphabetic characters');
                     isValid = false;
                 } else {
                     removeError('firstName');
                 }
     
                 // Last Name validation
-                if ($('#lastName').val().trim() === "") {
-                    showError('lastName', 'Last Name is required');
-                    isValid = false;
+                if (!namePattern.test($('#lastName').val().trim())) {
+                showError('lastName', 'Last Name must contain only alphabetic characters');
+                isValid = false;
                 } else {
                     removeError('lastName');
                 }
@@ -138,28 +139,31 @@
                 }
     
                 // City validation
-                if ($('#city').val().trim() === "") {
-                    showError('city', 'City is required');
-                    isValid = false;
-                } else {
-                    removeError('city');
-                }
+                const city = $('#city').val().trim();
+            if (!namePattern.test(city) || city.length < 2) {
+                showError('city', 'City must contain only alphabetic characters and be at least 2 characters long');
+                isValid = false;
+            } else {
+                removeError('city');
+            }
     
                 // State validation
-                if ($('#state').val().trim() === "") {
-                    showError('state', 'State is required');
-                    isValid = false;
-                } else {
-                    removeError('state');
-                }
+                const state = $('#state').val().trim();
+            if (!namePattern.test(state) || state.length < 2) {
+                showError('state', 'State must contain only alphabetic characters and be at least 2 characters long');
+                isValid = false;
+            } else {
+                removeError('state');
+            }
     
                 // Country validation
-                if ($('#country').val().trim() === "") {
-                    showError('country', 'Country is required');
-                    isValid = false;
-                } else {
-                    removeError('country');
-                }
+                const country = $('#country').val().trim();
+            if (!namePattern.test(country)) {
+                showError('country', 'Country must contain only alphabetic characters');
+                isValid = false;
+            } else {
+                removeError('country');
+            }
     
                 // Login ID validation
                 const loginId = $('#loginId').val();
