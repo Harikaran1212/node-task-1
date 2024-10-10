@@ -84,19 +84,18 @@
             // Validate form fields
             function validateForm() {
                 let isValid = true;
-                const namePattern = /^[a-zA-Z]+$/; // Regex for alphabetic characters only
     
-                // First Name validation (only alphabetic characters)
-                if (!namePattern.test($('#firstName').val().trim())) {
-                    showError('firstName', 'First Name must contain only alphabetic characters');
+                // First Name validation
+                if ($('#firstName').val().trim() === "") {
+                    showError('firstName', 'First Name is required');
                     isValid = false;
                 } else {
                     removeError('firstName');
                 }
     
-                // Last Name validation (only alphabetic characters)
-                if (!namePattern.test($('#lastName').val().trim())) {
-                    showError('lastName', 'Last Name must contain only alphabetic characters');
+                // Last Name validation
+                if ($('#lastName').val().trim() === "") {
+                    showError('lastName', 'Last Name is required');
                     isValid = false;
                 } else {
                     removeError('lastName');
@@ -138,28 +137,25 @@
                     removeError('street');
                 }
     
-                // City validation (only alphabetic characters and at least 2 characters long)
-                const city = $('#city').val().trim();
-                if (!namePattern.test(city) || city.length < 2) {
-                    showError('city', 'City must contain only alphabetic characters and be at least 2 characters long');
+                // City validation
+                if ($('#city').val().trim() === "") {
+                    showError('city', 'City is required');
                     isValid = false;
                 } else {
                     removeError('city');
                 }
     
-                // State validation (only alphabetic characters and at least 2 characters long)
-                const state = $('#state').val().trim();
-                if (!namePattern.test(state) || state.length < 2) {
-                    showError('state', 'State must contain only alphabetic characters and be at least 2 characters long');
+                // State validation
+                if ($('#state').val().trim() === "") {
+                    showError('state', 'State is required');
                     isValid = false;
                 } else {
                     removeError('state');
                 }
     
-                // Country validation (only alphabetic characters)
-                const country = $('#country').val().trim();
-                if (!namePattern.test(country)) {
-                    showError('country', 'Country must contain only alphabetic characters');
+                // Country validation
+                if ($('#country').val().trim() === "") {
+                    showError('country', 'Country is required');
                     isValid = false;
                 } else {
                     removeError('country');
@@ -215,7 +211,7 @@
                     creationTime: creationTime,
                     lastUpdatedTime: lastUpdatedTime
                 };
-    
+                
                 $.ajax({
                     url: 'https://node-9ogz.onrender.com/saveData',  // Adjust this URL based on your server
                     type: 'POST',
@@ -256,5 +252,6 @@
             });
         });
     </script>
+    
 </body>
 </html>
