@@ -217,7 +217,7 @@
                 };
                 
                 $.ajax({
-                    url: 'https://node-9ogz.onrender.com/saveData',  // Adjust this URL based on your server
+                    url: 'https://node-task-1-efgi.onrender.com/saveData',  // Adjust this URL based on your server
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify(formData),
@@ -233,7 +233,7 @@
             // Fetch data from MongoDB
             $('#fetchButton').on('click', function() {
                 $.ajax({
-                    url: 'https://node-9ogz.onrender.com/getData',  // Adjust this URL based on your server
+                    url: 'https://node-task-1-efgi.onrender.com/getData',  // Adjust this URL based on your server
                     type: 'GET',
                     success: function(data) {
                         $('#dataList').empty();
